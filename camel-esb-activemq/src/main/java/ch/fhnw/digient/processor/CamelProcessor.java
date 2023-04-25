@@ -33,14 +33,10 @@ public class CamelProcessor implements Processor {
 		CaseJSON jsonCase = new CaseJSON();
 		System.out.println(xmlCase.getDescription());
 
-		jsonCase.setProblemCaseId(xmlCase.getId());
-		jsonCase.setProblemCallerId(xmlCase.getCallerId());
-		jsonCase.setProblemCaseDescription(xmlCase.getDescription());
-		jsonCase.setProblemCallDate(xmlCase.getCallDate());
-		jsonCase.setProblemCallDuration(xmlCase.getCallDuration());
-		jsonCase.setProblemOperator(xmlCase.getOperator());
-		jsonCase.setProblemClientName(xmlCase.getClientName());
-		jsonCase.setProblemClientId(xmlCase.getClientId());
+		jsonCase.setIncidentId(xmlCase.getId());
+		jsonCase.setShortDescription(xmlCase.getDescription());
+		jsonCase.setReportDateTime(xmlCase.getCallDate());
+		jsonCase.setClientId(xmlCase.getClientId());
 
 		exchange.getIn().setBody(jsonCase);
 	}
