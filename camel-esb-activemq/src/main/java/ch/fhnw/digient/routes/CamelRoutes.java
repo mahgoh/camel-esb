@@ -31,7 +31,7 @@ public class CamelRoutes extends RouteBuilder {
 		// JSON Data Format
 		JacksonDataFormat jsonDataFormat = new JacksonDataFormat(CaseJSON.class);
 
-		from("file:C:/caseFolder") //the folder from which files are read
+		from("file:/Users/marco/Downloads/de") //the folder from which files are read
 			.unmarshal(xmlDataFormat) //convert the representation of the object used in communication to the internal representation
 			.process(new CamelProcessor()) //transform the data from XML to JSON
 			.marshal(jsonDataFormat) //convert the internal representation of the object to the representation needed for communication
