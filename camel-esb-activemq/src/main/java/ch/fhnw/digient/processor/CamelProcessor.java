@@ -8,29 +8,40 @@ import ch.fhnw.digient.model.CaseXML;
 
 /**
  * @author charuta.pande
- * This class implements the interface Processor
- * to perform message translation
- * from XML to JSON format
+ *         This class implements the interface Processor
+ *         to perform message translation
+ *         from XML to JSON format
  *
  */
 public class CamelProcessor implements Processor {
-	
+
 	/*
 	 * Exchange is the container that holds the information during message routing
 	 * a. An Exchange is created when a Consumer receives a request
-	 * b. A new Message is created, the request is set as the body of the Message and 
-	 * depending on the Consumer other Endpoint and protocol related information 
+	 * b. A new Message is created, the request is set as the body of the Message
+	 * and
+	 * depending on the Consumer other Endpoint and protocol related information
 	 * is added as headers on the Message.
-	 * c. Then an Exchange is created and the newly created Message is set as the "in" on the Exchange
+	 * c. Then an Exchange is created and the newly created Message is set as the
+	 * "in" on the Exchange
 	 */
 	public void process(Exchange exchange) throws Exception {
-		//The data read from the file is read into CaseXML and set as "in" on the exchange
-		CaseXML xmlCase = exchange.getIn().getBody(CaseXML.class); 
-		
+		// The data read from the file is read into CaseXML and set as "in" on the
+		// exchange
+		CaseXML xmlCase = exchange.getIn().getBody(CaseXML.class);
+
 		CaseJSON jsonCase = new CaseJSON();
-		System.out.println(xmlCase.getCaseDescription());
-		jsonCase.setProblemCaseId(xmlCase.getCaseId());
-		jsonCase.setProblemCaseDescription("Digital Enterprise Problem Case 5: Further Integration Approaches");
+		System.out.println(xmlCase.getDescription());
+
+		jsonCase.setProblemCaseId(xmlCase.getId());
+		jsonCase.setProblemCallerId(xmlCase.getCallerId());
+		jsonCase.setProblemCaseDescription(xmlCase.getDescription());
+		jsonCase.setProblemCallDate(xmlCase.getCallDate());
+		jsonCase.setProblemCallDuration(xmlCase.getCallDuration());
+		jsonCase.setProblemOperator(xmlCase.getOperator());
+		jsonCase.setProblemClientName(xmlCase.getClientName());
+		jsonCase.setProblemClientId(xmlCase.getClientId());
+
 		exchange.getIn().setBody(jsonCase);
 	}
 
